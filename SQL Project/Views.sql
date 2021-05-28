@@ -9,8 +9,6 @@ Select c.id,c.ezv_id,c.weight,C.POSITIONID,T.PFANNESTART as Start_Time from char
 inner join time_table t on C.ID = T.ID
 order by T.PFANNESTART asc;
 
-select * from TimeOrderdCharges;
-
 
 --Alle Produkte in Zeitlicher Reihenfolge
 CREATE OR REPLACE VIEW TimeOrderdProducts AS
@@ -24,13 +22,22 @@ CREATE OR REPLACE VIEW ProcessedCharges AS
 Select c.name as "Charge",c.weight as "WEIGHT (Kg)",an.name  as "Position",TT.PFANNESTART, TT.PFANNEEND, TT.VERTEILERSTART, TT.VERTEILEREND,TT.KOKILESTART,TT.KOKILEEND,TT.STRANGSTART,TT.STRANGEND  from charge c
 inner join ANLAGETEILNAME an on c.id = an.id
 inner join Time_Table tt on c.id = tt.id
-where c.POSITIONID=1
+where c.POSITIONID<4
 order by c.id;
 
 select * from ProcessedCharges;
+--alle produkte von einer charge
+select * from CHARGE c
+inner join PRODUKT p on c.ID = P.CHARGE_ID
+where c.id =2;
 
-select * from ANLAGETEILNAME;
 
+
+--alle text parameter ausgeben
+select p.id,p.name,P.ISTEXT,P.EINHEIT,TP.NAME,TP.PARAMETER_NO,tp.min,tp.max,tp.aim from parameter p 
+inner join TEXT_PARAM tp on p.id = TP.ID;
+
+select * from Charge;
 
 --Anzahl an Chargen und all' deren Produkte
 select count(*) from CHARGE c

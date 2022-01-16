@@ -1,3 +1,3 @@
 # Stranguss
 
--- Dieses Projekt war ein 1er :)
+- Dieses Projekt war ein 1er :)
